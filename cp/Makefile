@@ -1,13 +1,15 @@
-CC = clang
+CC = gcc
+EXEC = prog
+SRC = $(wildcard src/*.c)
+OBJ = $(patsubst src/%.c, build/%.o, $(SRC))
 
-prog : build/main.o build/cp.o build/mv.o
-	${CC} -o bin/prog build/main.o build/cp.o
+all: $(EXEC)
 
-build/main.o : src/main.c
-	${CC} -o build/main.o -c src/main.c
+$(EXEC): $(OBJ)
+	$(CC) -o bin/$(EXEC) $^
 
-build/cp.o : src/cp.c
-	${CC} -o build/cp.o -c src/cp.c
+build/%.o: src/%.c
+	$(CC) -o $@ -c $<
 
-build/mv.o : src/mv.c
-	${CC} -o build/mv.o -c src/mv.c
+clean:
+	rm -rf build/*.o

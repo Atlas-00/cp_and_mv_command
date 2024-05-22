@@ -4,8 +4,14 @@
 
 int main(int argc, char *argv[])
 {
-    char opt;
+    if (argc < 3) 
+    {
+        printf("Usage 1 : cp file1 file2 (copy file) \n");
+        printf("Usage 2 : cp -R dir1 dir2 (copy directory) \n");
+        return 0;
+    }
 
+    char opt;
     // Ajouter les arguments cp et mv à l'éxecution
     if (argv[1] != NULL && strcmp(argv[1], "-R") == 0)
     {
